@@ -1,11 +1,11 @@
-- name: Foo
+- name: Repeatable Infrastructure
   icon: bolt
-  details: Foo is a great feature we offer that you'll love!
+  details: We believe that deployment and setup should be a painless, repeatable process. 
 
-- name: Bar
+- name: Some Assembly Required 
   icon: chart-line
-  details: Bar is another amazing feature that will save you money!
+  details: Traditional tools require a diverse skillset to set up and properly configure, and no single product delivers a full solution. 
 
-- name: Baz
+- name: DevOps - Solved!
   icon: database
-  details: Baz is just one of the many great features we have!
+  details: We provide a simple framework for deployment automation and setup, with only one tool to learn and a simple, drag-and-drop interface, from simple to complex, your deployment needs will quickly be met!

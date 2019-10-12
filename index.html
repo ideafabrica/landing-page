@@ -1,16 +1,3 @@
----
-pricing_blurb: Several pricing options make our product affordable!
-
-price_1_name: Base
-price_1: 5
-
-price_2_name: Pro
-price_2: 10
-
-price_3_name: Enterprise
-price_3: 25
-
----
 <!doctype html>
 <html lang="en">
   <head>
@@ -103,7 +90,7 @@ price_3: 25
     </div>
 
     <div id="features" class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Features</h1>
+      <h1 class="display-4">Product Details</h1>
     </div>
 
     <div class="container">
@@ -111,7 +98,7 @@ price_3: 25
         <div class="row">
             {% for feature in site.data.features %}
               <div class="col-md-4">
-                <h2><i class="fas fa-{{feature.icon}}"></i> {{ feature.name }}</h2>
+                <h3><i class="fas fa-{{feature.icon}}"></i> {{ feature.name }}</h3>
                 <p>{{ feature.details }}</p>
               </div>
             {% endfor %}
