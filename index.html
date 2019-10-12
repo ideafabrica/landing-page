@@ -1,3 +1,16 @@
+---
+pricing_blurb: Several pricing options make our product affordable!
+
+price_1_name: Base
+price_1: 5
+
+price_2_name: Pro
+price_2: 10
+
+price_3_name: Enterprise
+price_3: 25
+
+---
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +20,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Amazing SaaS Product</title>
+    <title>{{ site.data.copy.title }}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -75,13 +88,13 @@
     </div>
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow" id="header">
-      <h5 id="company-name" class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+        <h5 id="company-name" class="my-0 mr-md-auto font-weight-normal">{{ site.data.copy.company }}</h5>
     </div>
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center" id="jumbo">
-      <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">Amazing SaaS Product</h1>
-        <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
+      <div class="col-md-8 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">{{ site.data.copy.heading }}</h1>
+        <p class="lead font-weight-normal">{{ site.data.copy.subheading }}</p>
         <a class="btn btn-outline-secondary" href="#features" id="learn-btn">Learn More</a>
         <a class="btn btn-success" href="#pricing" id="sign-up">View Pricing</a>
       </div>
@@ -96,73 +109,40 @@
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
-          <div class="col-md-4">
-            <h2><i class="fas fa-bolt"></i> Feature 1</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          </div>
-          <div class="col-md-4">
-            <h2><i class="fas fa-chart-line"></i> Feature 2</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          </div>
-          <div class="col-md-4">
-            <h2><i class="fas fa-database"></i> Feature 3</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          </div>
+            {% for feature in site.data.features %}
+              <div class="col-md-4">
+                <h2><i class="fas fa-{{feature.icon}}"></i> {{ feature.name }}</h2>
+                <p>{{ feature.details }}</p>
+              </div>
+            {% endfor %}
+        </div>
     </div>
 
 
     <div id="pricing" class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">Pricing</h1>
-      <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
+      <p class="lead"></p>
     </div>
 
     <div class="container">
       <div class="card-deck mb-3 text-center">
+        
+        {% for price in site.data.pricing %}
         <div class="card mb-4 box-shadow">
           <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Free</h4>
+          <h4 class="my-0 font-weight-normal">{{ price.name }}</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+            <h1 class="card-title pricing-card-title">{{ price.price}} <small class="text-muted">/ mo</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
+              {% for feature in price.features %}
+                <li>{{ feature }}</li>
+              {% endfor %}
             </ul>
             <button type="button" class="btn btn-lg btn-block btn-outline-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Select This Plan</button>
           </div>
         </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>20 users included</li>
-              <li>10 GB of storage</li>
-              <li>Priority email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Select This Plan</button>
-          </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Enterprise</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>30 users included</li>
-              <li>15 GB of storage</li>
-              <li>Phone and email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Select This Plan</button>
-          </div>
-        </div>
+        {% endfor %}
       </div>
 
     </div>

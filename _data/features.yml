@@ -1,0 +1,11 @@
+- name: Foo
+  icon: bolt
+  details: Foo is a great feature we offer that you'll love!
+
+- name: Bar
+  icon: chart-line
+  details: Bar is another amazing feature that will save you money!
+
+- name: Baz
+  icon: database
+  details: Baz is just one of the many great features we have!

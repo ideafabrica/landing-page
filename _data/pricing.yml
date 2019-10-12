@@ -1,0 +1,23 @@
+- name: Basic
+  price: $5
+  features:
+      - 10 users
+      - 2GB of storage
+      - Email support
+      - Help center access
+
+- name: Pro
+  price: $10
+  features:
+      - 50 users
+      - 5GB of storage
+      - Email support
+      - Priority help center access
+
+- name: Enterprise
+  price: $50
+  features:
+      - 100 users
+      - 10GB of storage
+      - Email support
+      - Amazing other thing
