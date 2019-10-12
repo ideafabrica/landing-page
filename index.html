@@ -13,7 +13,7 @@
     <title>{{ site.data.copy.title }}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
@@ -22,30 +22,49 @@
 
     <!-- Custom styles for this template -->
     <style>
+        body {
+            background: #f2f2f2;
+        }
+
         #header {
             margin-bottom: 0 !important;
-            box-shadow: 5px 0px rgba(0,0,0.8);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: #081424 !important;
+            border: 0px !important;
         }
 
         #jumbo {
-            background-image: linear-gradient(to bottom right, #141092, #108992);
+            background: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65) ), url(https://images.pexels.com/photos/7375/startup-photos.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
             margin: 0 !important;
             color: white;
+            background-position: top -350px right 0px;
+            background-size: cover;
         }
 
-        #learn-btn {
-            color: #00B1FF;
-            border-color: #00B1FF;
-        }
-
-        #learn-btn:hover {
-            background: #75D5FF;
-            color: #305769;
+        #heading {
+            text-transform: uppercase;
         }
 
         #company-name {
-            color: #0D3C7F;
-            font-family: 'Archivo Black', sans-serif;
+            color: #70ABFF;
+            font-family: 'Baloo Bhai', cursive;
+        }
+
+        #features {
+            margin-top: 4em;
+        }
+
+        .feature {
+            margin-bottom: 3em;
+        }
+
+        .image {
+            display: block;
+            width: 400px;
+            height: 350px;
+            background-repeat: no-repeat;
+            background-size: 400px 350px;
         }
     </style>
   </head>
@@ -83,34 +102,39 @@
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center" id="jumbo">
       <div class="col-md-8 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">{{ site.data.copy.heading }}</h1>
+        <h1 class="display-4 font-weight-normal" id="heading">{{ site.data.copy.heading }}</h1>
         <p class="lead font-weight-normal">{{ site.data.copy.subheading }}</p>
-        <a class="btn btn-outline-secondary" href="#features" id="learn-btn">Learn More</a>
-        <a class="btn btn-success" href="#pricing" id="sign-up">View Pricing</a>
+        <a class="btn btn-primary" href="#features" id="learn-btn">Learn More</a>
+        <a class="btn btn-success" href="#pricing" id="sign-up">Sign Up</a>
       </div>
       <div class="product-device box-shadow d-none d-md-block"></div>
       <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
     </div>
 
-    <div id="features" class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Product Details</h1>
-    </div>
-
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            {% for feature in site.data.features %}
-              <div class="col-md-4">
-                <h3><i class="fas fa-{{feature.icon}}"></i> {{ feature.name }}</h3>
+    <div class="container" id="features">
+        {% for feature in site.data.features %}
+          {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
+        <div class="row feature">
+            {% if thecycle == 'odd' %}
+            <div class="col-md-4 image" style="background-image: url({{ feature.image }})"></div>
+            <div class="col-md-4">
+                <h3>{{ feature.name }}</h3>
                 <p>{{ feature.details }}</p>
-              </div>
-            {% endfor %}
+            </div>
+            {% else %}
+                <div class="col-md-8">
+                    <h3>{{ feature.name }}</h3>
+                    <p>{{ feature.details }}
+                </div>
+                <div class="col-md-4 image" style="background-image: url({{ feature.image }})"></div>
+            {% endif %}
         </div>
+        {% endfor %}
     </div>
 
 
     <div id="pricing" class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Pricing</h1>
+      <h1 class="display-5">Get Started With a 14 day free trial!</h1>
       <p class="lead"></p>
     </div>
 
