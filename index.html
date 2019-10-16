@@ -70,32 +70,6 @@
   </head>
 
   <body>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">We aren't quite ready!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true"></span>
-            </button>
-          </div>
-          <div class="modal-body">
-              Our apologies, our product isn't quite ready. Enter your email below and we will contact you when you can sign up! 
-
-              <form style="margin-top: 1em;">
-              <div class="form-group">
-                <label for="exampleFormControlInput1" style="font-weight: bold">Your Email Address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-              </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Sign up</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow" id="header">
         <h5 id="company-name" class="my-0 mr-md-auto font-weight-normal">{{ site.data.copy.company }}</h5>
     </div>
@@ -153,14 +127,12 @@
                 <li>{{ feature }}</li>
               {% endfor %}
             </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Select This Plan</button>
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary" type="button" class="btn btn-primary" onclick="showMailingPopUp()">Select This Plan</button>
           </div>
         </div>
         {% endfor %}
       </div>
-
     </div>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -168,12 +140,14 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-      Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-      });
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+    <script type="text/javascript">
+        function showMailingPopUp() {
+            window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"60ab13d7f16c92cfef1bf4fbe","lid":"3039a17524","uniqueMethods":true}) })
+            document.cookie = "MCPopupClosed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        };
     </script>
-  </body>
+    </body>
 </html>
