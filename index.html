@@ -123,23 +123,28 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <h4>Sign up below, and we'll keep you updated on our progress!</h4>
-                      <form>
-                          <div class="form-group">
-                              <label for="user-first">First Name:</label>
-                              <input type="text" class="form-control" id="user-first" placeholder="First Name" />
-                              <label for="user-last">Last Name:</label>
-                              <input type="text" class="form-control" id="user-last" placeholder="Last Name" />
-                          </div>
-                          <div class="form-group">
-                              <label for="user-email">Email Address:</label>
-                              <input type="email" class="form-control" id="user-email" aria-describedby="email-help" placeholder="Email" />
-                              <small id="email-help" class="form-text text-muted">We won't share your information!</small>
-                          </div>
-                      </form>
+                      <div id="signup-form">
+                          <h4>Sign up below, and we'll keep you updated on our progress!</h4>
+                          <form>
+                              <div class="form-group">
+                                  <label for="user-name">Full Name:</label>
+                                  <input type="text" class="form-control" id="user-name" placeholder="Full Name" />
+                                  <input type="text" class="form-control" id="address" style="display: none;" />
+                              </div>
+                              <div class="form-group">
+                                  <label for="user-email">Email Address</label>
+                                  <input type="email" class="form-control" id="user-email" aria-describedby="email-help" placeholder="Email" />
+                                  <small id="email-help" class="form-text text-muted">We won't share your information!</small>
+                              </div>
+                          </form>
+                      </div>
+                      <div id="success" style="display: none;">
+                          <h4>Successfully signed up!</h4>
+                          <p>We will let you know as soon as our product is available!</p>
+                      </div>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-btn">Close</button>
                       <button type="button" class="btn btn-primary" id="submit-details">Submit</button>
                   </div>
               </div>
@@ -175,17 +180,47 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
+        const CAMPAIGN_ID = {{ site.data.config.campaign }};
+
         $(function(){
+            $("#close-btn").click(function(e) {
+                $("#success").hide();
+                $("#submit-details").show();
+                $("#signup-form").show();
+            });
+
             $('#submit-details').click(function(e){
                 var email = $('#user-email');
-                var first = $('#user-first');
-                var last = $('#user-last');
+                var name = $('#user-name');
+                var spam = $('#address');
 
-                alert(`Info: ${email.val()}, ${first.val()}, ${last.val()}`);
+                // We only send the values if the fake 'address' field is not
+                // filled. Otherwise we don't do anything.
+                if(!spam.val()) {
+                    var data = {email:email.val(), name: name.val(), campaign: CAMPAIGN_ID};
 
-                email.val('');
-                first.val('');
-                last.val('');
+                    (async () => {
+                      const rawResponse = await fetch('https://mail-subscribe.duckdns.org/api/subscribe', {
+                        method: 'POST',
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                      });
+                      const content = await rawResponse.json();
+
+                      console.log(content);
+                      $("#submit-details").hide();
+                      $("#signup-form").hide();
+                      $("#success").show();
+                        
+                      email.val('');
+                      name.val('');
+                    })();
+                } else {
+                    alert(`SPAM: ${spam.val()}`);
+                }
             });
         });
     </script>
