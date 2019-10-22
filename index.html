@@ -113,6 +113,39 @@
     </div>
 
     <div class="container">
+      <div class="modal fade" id="user-dialog" tabindex="-1" role="dialog" aria-labelledby="user-dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">We aren't quite ready yet!</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <h4>Sign up below, and we'll keep you updated on our progress!</h4>
+                      <form>
+                          <div class="form-group">
+                              <label for="user-first">First Name:</label>
+                              <input type="text" class="form-control" id="user-first" placeholder="First Name" />
+                              <label for="user-last">Last Name:</label>
+                              <input type="text" class="form-control" id="user-last" placeholder="Last Name" />
+                          </div>
+                          <div class="form-group">
+                              <label for="user-email">Email Address:</label>
+                              <input type="email" class="form-control" id="user-email" aria-describedby="email-help" placeholder="Email" />
+                              <small id="email-help" class="form-text text-muted">We won't share your information!</small>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" id="submit-details">Submit</button>
+                  </div>
+              </div>
+          </div>
+
+      </div>
       <div class="card-deck mb-3 text-center">
         
         {% for price in site.data.pricing %}
@@ -127,7 +160,7 @@
                 <li>{{ feature }}</li>
               {% endfor %}
             </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary" type="button" class="btn btn-primary" onclick="showMailingPopUp()">Select This Plan</button>
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary" data-toggle="modal" data-target="#user-dialog">Select This Plan</button>
           </div>
         </div>
         {% endfor %}
@@ -140,14 +173,21 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 
-    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
     <script type="text/javascript">
-        function showMailingPopUp() {
-            window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"60ab13d7f16c92cfef1bf4fbe","lid":"3039a17524","uniqueMethods":true}) })
-            document.cookie = "MCPopupClosed=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-        };
+        $(function(){
+            $('#submit-details').click(function(e){
+                var email = $('#user-email');
+                var first = $('#user-first');
+                var last = $('#user-last');
+
+                alert(`Info: ${email.val()}, ${first.val()}, ${last.val()}`);
+
+                email.val('');
+                first.val('');
+                last.val('');
+            });
+        });
     </script>
     </body>
 </html>
