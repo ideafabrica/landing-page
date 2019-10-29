@@ -3,7 +3,7 @@
   details: Creating your development pipelines shouldn't be a complicated process. Our drag-and-drop interface makes setting up your continuous integration, continuous deployment, and testing stages easy! 
 
 - name: Repeatable infrastructure and processes 
-  image:  
+  image: https://images.pexels.com/photos/236093/pexels-photo-236093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
   details: Building your infrastructure should be easy -  and repeatable. Our editor produces the necessary files to setup (and re-setup!) your infrastructure. 
   
 - name: Avoid vendor lock-in 
