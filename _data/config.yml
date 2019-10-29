@@ -1,2 +1,5 @@
 # The campaign ID for the subscription.
 campaign: 1
+
+# The Google Analytics ID
+analytics_id: UA-151099584-1
