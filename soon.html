@@ -1,0 +1,44 @@
+---
+title: Simple software deployments 
+layout: default
+---
+
+<div class="row" id="title">
+    <h3 class="tag-line">
+        Hello! You caught us before we're ready.
+    </h3>
+</div>
+<div class="row" id="success" style="display: none">
+    <div class="col col-1"></div>
+    <div class="col col-10">
+        <h3 class="tag-line">Success - Thank you for your interest!</h3>
+        <p style="text-align: center">We will send you a reminder after we've put the finishing touches on 
+           our product and you can register.</p>
+    </div>
+    <div class="col col-1"></div>
+</div>
+<div class="row">
+  <div class="col col-1"></div>
+  <div class="col col-10" id="submit-details">
+      <p>We're working hard to put the finishing touches on 
+    {{ site.data.copy.company }}. Things are going well and it should be ready 
+    to help you {{ site.data.copy.to_help_you }} very soon. If you'd like us to 
+    send you a reminder when we're ready, just put your email in below.</p>
+      <form>
+          <div class="form-group">
+              <label for="user-name">Full Name:</label>
+              <input type="text" class="form-control" id="user-name" placeholder="Full Name" />
+              <input type="text" class="form-control" id="address" style="display: none;" />
+          </div>
+          <div class="form-group">
+              <label for="user-email">Email Address</label>
+              <input type="email" class="form-control" id="user-email" aria-describedby="email-help" placeholder="Email" />
+              <small id="email-help" class="form-text text-muted">We won't share your information!</small>
+          </div>
+        <button type="button" class="btn btn-primary" id="submit-details">Remind Me</button>
+    </form>
+  </div>
+  <div class="col col-1"></div>
+</div>
+
+

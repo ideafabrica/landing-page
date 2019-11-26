@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>{{ page.title }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
+    <link href="https://fonts.googleapis.com/css?family=Pridi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+
+<style>
+    body {
+        background: #fdfaf8;
+    }
+
+    .landing-box {
+        padding-top: 5em;
+    }
+
+    .name {
+        color: #7c47c8;
+        width: 100%;
+        text-align: center;
+        font-family: 'Pridi', serif;
+        letter-spacing: 1px;
+    }
+
+    .tag-line {
+        font-family: 'Raleway', sans-serif;
+        font-size: 2em;
+        letter-spacing: 1px;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        padding: 1em 0 1em 0;
+        color: #373737;
+    }
+
+    .number {
+        font-size: 2em;
+        font-family: 'Raleway', sans-serif;
+        border-right: 5px solid #7c47c8; 
+    }
+
+    .col span {
+        color: #646464;
+    }
+
+    .feature {
+        margin-bottom: 2em;
+    }
+
+    .sign-up {
+        background: #ffffff;
+        border: 1px solid #f2f2f2;
+        border-radius: 5px;
+        padding: 3em;
+        text-align: center;
+    }
+
+    .sign-up b {
+        font-family: 'Raleway', sans-serif;
+        font-size: 1.5em;
+    }
+
+    .sign-up a {
+        background: #7c47c8;
+        box-shadow: 2px 2px #3f177b;
+        padding: 10px;
+        margin-top: 4em;
+        width: 200px;
+        border-radius: 5px;
+        border: 0px;
+        color: #ffffff;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .fa-check-circle {
+        font-size: 6em;
+        margin-bottom: 0.25em;
+        color: green;
+    }
+</style>
+  </head>
+  <body>
+      <div class="container">
+          <div class="landing-box">
+              <div class="row">
+                  <h1 class="name">{{ site.data.copy.company  }}</h1>
+              </div>
+            {{ content }}
+        </div>
+      </div>
+  </body>
+
+  <link rel="stylesheet" 
+        href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" 
+        crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+          crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.data.config.analytics_id }}"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+gtag('config', '{{ site.data.config.analytics_id }}');
+  </script>
+  <script>
+    $(function() {
+        const CAMPAIGN_ID = {{ site.data.config.campaign }};
+        $("#submit-details").click(function(e) {
+            let email = $("#user-email");
+            let name = $("#user-name");
+            let spam = $("#address");
+
+            // We only send the values if the fake 'address' field is not filled.
+            // Otherwise we don't do anything.
+            if(!spam.val()) {
+                let data = {email:email.val(), name: name.val(), campaign: CAMPAIGN_ID};
+                (async () => {
+                      const rawResponse = await fetch('https://mail-subscribe.duckdns.org/api/subscribe', {
+                        method: 'POST',
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                      });
+
+                      const content = await rawResponse.json();
+                      $("#submit-details").hide();
+                      $("#title").hide();
+                      $("#signup-form").hide();
+                      $("#success").show();
+                        
+                      email.val('');
+                      name.val('');
+                    })();
+            } else {
+                console.log(`SPAM DETECTED: ${spam.val()}`);
+            }
+        });
+    });
+  </script>
+</html>
